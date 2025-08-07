@@ -2,11 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Switch to SSH') {
             steps {
                 sshagent(credentials: ['jenkins-pod']) {
-                    git url: 'git@github.com:anilthanki/jenkins-test.git',
-                        credentialsId: 'jenkins-pod'
+                    sh '''
+                        git remote set-url origin git@github.com:anilthanki/jenkins-test.git
+                        git fetch --all
+                    '''
                 }
             }
         }
