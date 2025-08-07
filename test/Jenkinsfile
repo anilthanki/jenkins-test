@@ -3,11 +3,12 @@ pipeline {
 
     stages {
         stage('Checkout') {
-          steps {
-            sshagent(credentials: ['jenkins-pod']) {
-              git url: 'git@github.com:anilthanki/jenkins-test.git'
+            steps {
+                sshagent(credentials: ['jenkins-pod']) {
+                    git url: 'git@github.com:anilthanki/jenkins-test.git',
+                        credentialsId: 'jenkins-pod'
+                }
             }
-          }
         }
         stage('Hello') {
             steps {
