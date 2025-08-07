@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+          steps {
+            sshagent(credentials: ['jenkins-pod']) {
+              git url: 'git@github.com:anilthanki/jenkins-test.git'
+            }
+          }
+        }
         stage('Hello') {
             steps {
                 echo 'Hello World'
